@@ -1,0 +1,27 @@
+1//
+db.orders.insertMany([
+    {
+        empId:ObjectId('68386c8c26dfb0275db7a4b4'),
+        items:{1:3,3:2},
+        ordervalue:454,
+        status:"pending"
+    },
+    {
+        empId:ObjectId('68386c8c26dfb0275db7a4b5'),
+        items:{2:4,4:3},
+        ordervalue:550,
+        status:"delivered"
+    }
+]);
+
+//2
+db.orders.aggregate([
+    {
+        $lookup:{
+            from:"employees",
+            localField:"empId",
+            foreignField:"_id",
+            as:"employeeDetails"
+        }
+    }
+])
